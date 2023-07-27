@@ -1,0 +1,9 @@
+"CounterStrikeGarryOffensive"
+{
+	"base"		"base"
+	"title"		"Counter Strike: Garry Offensive"
+	"maps"		"^de_"
+	"category"	"pvp"
+	"menusystem" 	"1"
+	
+}
