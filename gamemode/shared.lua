@@ -9,6 +9,8 @@ DeriveGamemode( "sandbox" )
 
 team.SetUp(0, "UwU" , Color(255,0,0))
 team.SetUp(1, "OwO" , Color(0,0,255))
+team.SetUp(2, "USpectator" , Color(255,255,255))
+team.SetUp(3, "OSpectator" , Color(255,255,255))
 
 roundActive = false
 

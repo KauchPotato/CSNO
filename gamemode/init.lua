@@ -80,20 +80,39 @@ end
 function GM:PlayerInitialSpawn(ply)
     -- net.Start("trans")
     -- net.Send(ply)
-    ply:SetUpTeam(1)
+    ply:SetUpTeam(math.random(0,1))
 end
 
 function GM:PlayerSpawn(ply)
     --print("test")
-    player_manager.SetPlayerClass(ply, "player_default")
-    print(player_manager.TranslatePlayerModel(ply:GetInfo("cl_playermodel")))
-    ply:GiveWeapons(ply:Team())
-    ply:SetupHands()
-    //ply:Give("weapon_csgo_pist_usps")
-    //PrintTable(weapons.GetList())
-    ply:SetNW2Int("money", 8000)
-    ply:SetArmor(50)
-    --print(weapons.GetStored("weapon_csgo_pist_tec9"):SetHoldType("pistol"))
+    local playerteam = ply:Team()
+    local teammates = team.GetPlayers(playerteam)
+    if roundActive == true then
+        if playerteam == 0 then
+            ply:SetTeam(2)
+        end
+        if playerteam == 1 then
+            ply:SetTeam(3)
+        end
+        ply:Spectate(OBS_MODE_IN_EYE)
+        ply:SpectateEntity(teammates[0])
+    else
+        if playerteam == 2 then
+            ply:SetUpTeam(0)
+        end
+        if playerteam == 3 then
+            ply:SetUpTeam(1)
+        end
+        ply:UnSpectate()  
+        player_manager.SetPlayerClass(ply, "player_default")
+        ply:GiveWeapons(ply:Team())
+        ply:SetupHands()
+        //ply:Give("weapon_csgo_pist_usps")
+        //PrintTable(weapons.GetList())
+        ply:SetArmor(50)
+        --print(weapons.GetStored("weapon_csgo_pist_tec9"):SetHoldType("pistol"))
+    end
+
 end
 function GM:PlayerSetHandsModel( ply, ent )
 

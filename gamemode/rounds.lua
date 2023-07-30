@@ -42,13 +42,12 @@ function roundCheck()
     local uAlive = 0
     local oAlive = 0
     timer.Create("roundtimer",90,1,function()
-        for k,v in pairs(team.GetPlayers(1))do
+        for k,v in pairs(team.GetPlayers(0))do
             if(v:Alive()) then
-                roundEnd("UwU")
+                roundEnd("OwO")
                 timer.Stop("roundtimer")
             end
         end
-        roundEnd("OwO")
     end)
     timer.Create("check", 1, 0, function()
         local uAlive = 0
@@ -120,8 +119,19 @@ function roundEnd(winner)
     timer.Create("clean",5,1,function()
         game.CleanUpMap()
         for k, v in pairs(player.GetAll()) do
-            if(!v:Alive()) then
-                v:Spawn()
+            if(v:GetObserverTarget() != NULL) then
+                if (v:Team() == 2) then
+                    v:SetTeam(0)
+                    v:SetUpTeam(0)
+                    v:UnSpectate()
+                    v:Spawn()
+                end
+                if (v:Team() == 3) then
+                    v:SetTeam(1)
+                    v:SetUpTeam(1)
+                    v:UnSpectate()
+                    v:Spawn()
+                end
             end
             v:SetHealth(100)
             v:SetArmor(50)
