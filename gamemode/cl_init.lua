@@ -1,5 +1,4 @@
 include("shared.lua")
-include("init.lua")
 include("buy.lua")
 include("newbuymenu.lua")
 include("teamsetup.lua")

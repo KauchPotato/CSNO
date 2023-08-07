@@ -26,6 +26,7 @@ function ply:SetUpTeam(n)
     self:SetJumpPower(220)
     self:SetModel(player_manager.TranslatePlayerModel(self:GetInfo("cl_playermodel")))
     self:GiveWeapons(n)
+    self:SetNWInt("money", 800)
     
 end
 function ply:GiveWeapons(n)

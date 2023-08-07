@@ -7,6 +7,8 @@ AddCSLuaFile("newbuymenu.lua")
 AddCSLuaFile("scoreboard.lua")
 AddCSLuaFile("main.lua")
 AddCSLuaFile("autorun/sh_burger_init.lua")
+AddCSLuaFile("player_class/player_default.lua")
+include("cl_init.lua")
 include("player_class/player_default.lua")
 include("shared.lua")
 include("teamsetup.lua")
@@ -32,49 +34,7 @@ OSpawnLocation = {}
 siteAlocation = {}
 siteBlocation = {}
 
-function GM:Initialize()
 
-    local mapname = game.GetMap()
-
-    if(!file.Exists("CSNO","DATA")) then
-        file.CreateDir("CSNO")
-    end
-    if(!file.Exists("CSNO/"..mapname,"DATA")) then
-        file.CreateDir("CSNO/"..mapname)
-    else
-        if(!file.Exists("CSNO/"..mapname.."/siteA.txt","DATA")) then
-            file.Write("CSNO/"..mapname.."/siteA.txt",util.TableToKeyValues(siteAlocation))
-        else
-            siteAlocation = util.KeyValuesToTable(file.Read("CSNO/"..mapname.."/siteA.txt","DATA","DATA"))
-        end
-
-        if(!file.Exists("CSNO/"..mapname.."/siteB.txt","DATA")) then
-            file.Write("CSNO/"..mapname.."/siteB.txt",util.TableToKeyValues(siteBlocation))
-        else
-            siteBlocation = util.KeyValuesToTable(file.Read("CSNO/"..mapname.."/siteB.txt","DATA"))
-        end
-    end
-
-    if(!file.Exists("CSNO","DATA")) then
-        file.CreateDir("CSNO")
-    end
-    if(!file.Exists("CSNO/"..mapname,"DATA")) then
-        file.CreateDir("CSNO/"..mapname)
-    else
-        if(!file.Exists("CSNO/"..mapname.."/spawnsU.txt","DATA")) then
-            file.Write("CSNO/"..mapname.."/spawnsU.txt",util.TableToKeyValues(USpawnLocation))
-        else
-            USpawnLocation = util.KeyValuesToTable(file.Read("CSNO/"..mapname.."/spawnsU.txt","DATA","DATA"))
-        end
-
-        if(!file.Exists("CSNO/"..mapname.."/spawnsO.txt","DATA")) then
-            file.Write("CSNO/"..mapname.."/spawnsO.txt",util.TableToKeyValues(OSpawnLocation))
-        else
-            OSpawnLocation = util.KeyValuesToTable(file.Read("CSNO/"..mapname.."/spawnsO.txt","DATA"))
-        end
-    end
-    PrintTable(siteAlocation)
-end
 
 
 function GM:PlayerInitialSpawn(ply)
@@ -152,11 +112,13 @@ function GM:PlayerButtonDown(ply, button)
             ply:DropWeapon()
             gnum = gnum - 1
         end
-        if(ply:GetActiveWeapon() != "arc9_go_knife_t" or ply:GetActiveWeapon() != "arc9_go_knife_ct") then
-            print(ply:GetActiveWeapon())
-            print(pnum, snum, tnum)
-            ply:DropWeapon() 
-            pnum = pnum -1
+        if(ply:GetActiveWeapon().ClassName != "arc9_go_knife_t" ) then
+            if(ply:GetActiveWeapon().ClassName != "arc9_go_knife_ct") then
+                print(ply:GetActiveWeapon())
+                print(pnum, snum, tnum)
+                ply:DropWeapon() 
+                pnum = pnum -1
+            end
         end
 
             if pnum < 0 then
@@ -254,6 +216,10 @@ function GM:PlayerCanPickupWeapon(ply, weapon)
         return true
     end
 end
+
+
+
+
 
 net.Receive("bought", function(len,ply)
     local weapon = net.ReadString()
