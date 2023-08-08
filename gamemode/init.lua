@@ -186,11 +186,15 @@ function drop( ply )
 	if ( ply:IsValid() ) then
 		-- Loop through all player weapons and drop them.
 		for _, wep in ipairs( ply:GetWeapons() ) do
-            if wep.HoldType == "grenade" then
-                gnum = gnum - 1
+            if(ply:GetActiveWeapon().ClassName != "arc9_go_knife_t" ) then
+                if(ply:GetActiveWeapon().ClassName != "arc9_go_knife_ct") then
+                    if wep.HoldType == "grenade" then
+                        gnum = gnum - 1
+                    end
+                    ply:DropWeapon( wep )
+                    pnum = pnum - 1
+                end
             end
-            ply:DropWeapon( wep )
-            pnum = pnum - 1
         end
         if pnum < 0 then
             pnum = 0

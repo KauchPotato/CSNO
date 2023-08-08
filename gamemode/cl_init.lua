@@ -17,8 +17,11 @@ local randomweap = {}
 --     return true
 -- end
 function getmoney(ply)
-    local money = 9000000
-    return money
+    return ply:GetNW2Int("money")
+end
+
+function setMoney(ply,amount)
+    ply:SetNW2Int("money",amount)
 end
 
 

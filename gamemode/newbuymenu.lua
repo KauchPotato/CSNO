@@ -15,8 +15,15 @@ local PANEL = {
         random3()
         random4()
         random5()
+        labelweap = vgui.Create("DLabel",self)
+        labelweap:SetPos(x - 980 , y - 650)
+        labelweap:SetSize(200,50)
+        labelweap:SetText("Weapons:")
+        labelweap:SetFont("DermaLarge")
+        labelweap:SetTextColor(Color(255,255,255,255))
+
         icon1 = vgui.Create("ContentIcon",self)
-        icon1:SetPos(x - 980 , y - 250)
+        icon1:SetPos(x - 980 , y - 600)
         icon1:SetName(icon1name)
         icon1.DoClick = function()
             net.Start("bought")
@@ -32,7 +39,7 @@ local PANEL = {
         end
         
         icon2 = vgui.Create("ContentIcon",self)
-        icon2:SetPos(x - 780 , y - 250)
+        icon2:SetPos(x - 780 , y - 600)
         icon2:SetName(icon2name)
         icon2.DoClick = function()
             net.Start("bought")
@@ -48,7 +55,7 @@ local PANEL = {
         end
 
         icon3 = vgui.Create("ContentIcon",self)
-        icon3:SetPos(x - 580 , y - 250)
+        icon3:SetPos(x - 580 , y - 600)
         icon3:SetName(icon3name)
         icon3.DoClick = function()
             net.Start("bought")
@@ -64,7 +71,7 @@ local PANEL = {
         end
 
         icon4 = vgui.Create("ContentIcon",self)
-        icon4:SetPos(x - 380 , y - 250)
+        icon4:SetPos(x - 380 , y - 600)
         icon4:SetName(icon4name)
         icon4.DoClick = function()
             net.Start("bought")
@@ -80,7 +87,7 @@ local PANEL = {
         end
 
         icon5 = vgui.Create("ContentIcon",self)
-        icon5:SetPos(x - 180 , y - 250)
+        icon5:SetPos(x - 180 , y - 600)
         icon5:SetName(icon5name)
         icon5.DoClick = function()
             net.Start("bought")
@@ -95,6 +102,62 @@ local PANEL = {
             changename()
         end
 
+        labelgrenade = vgui.Create("DLabel",self)
+        labelgrenade:SetPos(x - 980 , y - 450)
+        labelgrenade:SetSize(200,50)
+        labelgrenade:SetText("Grenades:")
+        labelgrenade:SetFont("DermaLarge")
+        labelgrenade:SetTextColor(Color(255,255,255,255))
+
+        icon6 = vgui.Create("ContentIcon",self)
+        icon6:SetPos(x - 980 , y - 400)
+        icon6:SetName("Flashbang")
+        icon6.DoClick = function()
+            net.Start("bought")
+            net.WriteString("arc9_go_nade_flashbang")
+            net.SendToServer()
+            self:SetVisible(false)
+        end
+
+        icon7 = vgui.Create("ContentIcon",self)
+        icon7:SetPos(x - 780 , y - 400)
+        icon7:SetName("Smoke Grenade")
+        icon7.DoClick = function()
+            net.Start("bought")
+            net.WriteString("arc9_go_nade_smoke")
+            net.SendToServer()
+            self:SetVisible(false)
+        end
+        
+        icon8 = vgui.Create("ContentIcon",self)
+        icon8:SetPos(x - 580 , y - 400)
+        icon8:SetName("Incendiary Grenade")
+        icon8.DoClick = function()
+            net.Start("bought")
+            net.WriteString("arc9_go_nade_incendiary")
+            net.SendToServer()
+            self:SetVisible(false)
+        end
+
+        icon9 = vgui.Create("ContentIcon",self)
+        icon9:SetPos(x - 380 , y - 400)
+        icon9:SetName("HE Grenade")
+        icon9.DoClick = function()
+            net.Start("bought")
+            net.WriteString("arc9_go_nade_frag")
+            net.SendToServer()
+            self:SetVisible(false)
+        end
+
+        icon10 = vgui.Create("ContentIcon",self)
+        icon10:SetPos(x - 180 , y - 400)
+        icon10:SetName("Decoy Grenade")
+        icon10.DoClick = function()
+            net.Start("bought")
+            net.WriteString("arc9_go_nade_decoy")
+            net.SendToServer()
+            self:SetVisible(false)
+        end
         local Closebutton = vgui.Create("DButton",self)
         Closebutton:SetText("close")
         Closebutton:SetSize(50,30)

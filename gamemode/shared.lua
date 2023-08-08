@@ -116,25 +116,42 @@ function GM:Initialize()
 end
 
 
-hook.Add("PlayerDeath", "moneything", function(ply,weap,attacker)
+hook.Add("PlayerDeath", "moneything", function(ply,ent,attacker)
     if(ply != attacker) then
-        local val = attacker:GetNWInt("money")
-        if(table.HasValue(cat1,weap)) then
-            attacker:SetNWInt("money", 300)
+        local weap = attacker:GetActiveWeapon():GetClass()
+        for k,v in pairs(cat1) do
+            if v.ClassName == weap then
+                attacker:SetNWInt("money",attacker:GetNWInt("money")+300)
+                break;
+            end
         end
-        if(table.HasValue(cat2,weap)) then
-            attacker:SetNWInt("money", 600)
+        for k,v in pairs(cat2) do
+            if v.ClassName == weap then
+                attacker:SetNWInt("money",attacker:GetNWInt("money")+300)
+                break;
+            end
         end
-        if(table.HasValue(cat3,weap)) then
-            attacker:SetNWInt("money", 300)
+        for k,v in pairs(cat3) do
+            if v.ClassName == weap then
+                attacker:SetNWInt("money",attacker:GetNWInt("money")+600)
+                break;
+            end
         end
-        if(table.HasValue(cat4,weap)) then
-            attacker:SetNWInt("money", 300)
+        for k,v in pairs(cat4) do
+            if v.ClassName == weap then
+                attacker:SetNWInt("money",attacker:GetNWInt("money")+300)
+                break;
+            end
         end
-        if(table.HasValue(cat5,weap)) then
-            attacker:SetNWInt("money", 100)
+        for k,v in pairs(cat5) do
+            if v.ClassName == weap then
+                attacker:SetNWInt("money",attacker:GetNWInt("money")+100)
+                break;
+            end
         end
-        attacker:ChatPrint("You killed "..ply:Nick().." and got $"..attacker:GetNWInt("money").."!"..val)
+
+        attacker:ChatPrint("You killed "..ply:Nick().." and got $"..attacker:GetNWInt("money").."!")
+        print(weap)
     end
 end)
 
